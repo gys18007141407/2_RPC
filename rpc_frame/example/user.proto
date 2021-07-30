@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package LoginRegist;
+
+option cc_generic_services = true;
+
+message ResultCode{
+    int32 state_code = 1;
+    bytes desc_msg = 2;
+}
+
+
+message LoginRequest{
+    bytes id = 1;
+    bytes pwd = 2;
+}
+
+message LoginResponse{
+    ResultCode result = 1;
+    bool is_success = 2;
+}
+
+message RegistRequest{
+    bytes id = 1;
+    bytes pwd = 2;
+    bytes name = 3;
+}
+
+message RegistResponse{
+    ResultCode result = 1;
+    bool is_success = 2;
+}
+
+// 或者用Login和Regist用同一个返回消息结构
+
+message Test_Request{
+    uint32 a = 1;
+    bool b = 2;
+    double c = 3;
+}
+
+message Test_Response{
+
+}
+
+service Service_User_Login_Regist{
+    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc Regist(RegistRequest) returns (RegistResponse);
+    rpc Test_Args(Test_Request) returns (Test_Response);
+}

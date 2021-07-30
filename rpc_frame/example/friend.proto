@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package FriendList;
+
+option cc_generic_services = true;
+
+message ResultCode{
+    int32 state_code = 1;
+    bytes desc_msg = 2;
+}
+
+message GetFriendListRequest{
+    bytes id = 1;
+}
+
+message GetFriendListResponse{
+    ResultCode result = 1;
+    repeated bytes friends_list = 2;
+}
+
+// 由id获取好友信息
+service RPC_Service_Friend_List{
+    rpc GetFriendList(GetFriendListRequest) returns (GetFriendListResponse);
+} 
